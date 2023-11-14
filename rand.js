@@ -71,9 +71,6 @@ var items = [
     ],
 ];
 
-// // 定义一个数组，存储对应的范围
-// var ranges = [20, 40, 50, 60, 65, 90, 100, 100];
-
 var titles = [
     "咒法化形系",
     "塑能转化系",
@@ -154,7 +151,8 @@ function randomInt(seed, range) {
 }
 
 
-function getItem(num, entry) {
+function getItem(num, round, entry) {
+    // num是随机数的出值，entry是第几个表格，对应items；round是第一轮还是第二轮，对应intervals
     // 根据条目获取区间数组
     var interval = intervals[entry];
     // 遍历区间数组，找到随机数所在的区间索引
@@ -169,14 +167,14 @@ function getItem(num, entry) {
     if (index != -1) {
         return items[entry][index];
     } else {
-        // return "无效的数字";
         return items[entry][-1];
     }
 }
 
 
 function generate() {
-    var data = [];
+    var data_1 = [];
+    var data_2 = [];
     var data_int_1 = [];
     var data_int_2 = [];
 
@@ -193,7 +191,7 @@ function generate() {
         for (var i = 0; i < 5; i++) {
             var num = randomInt(seed, 100);
             data_int_1[i] = num;
-            var item = getItem(num, 0);
+            var item = getItem(num, 0, 0);
             var li = document.createElement("li");
             li.style = "padding-top: 8px;"
             var div1 = document.createElement("div");
@@ -202,14 +200,14 @@ function generate() {
             div2.innerHTML = "出值：" + num;
             li.appendChild(div1);
             li.appendChild(div2);
-            data[i] = item;
+            data_1[i] = item;
             list.appendChild(li);
             seed = num;
         }
         for (var i = 0; i < 12; i++) {
             var num = randomInt(seed, 100);
             data_int_2[i] = num;
-            var item = getItem(num, 1);
+            var item = getItem(num, 1, 1 + (i % 6));
             var li = document.createElement("li");
             li.style = "padding-top: 8px;"
             var div3 = document.createElement("div");
@@ -218,7 +216,7 @@ function generate() {
             div4.innerHTML = "出值：" + num;
             li.appendChild(div1);
             li.appendChild(div2);
-            data[i] = item;
+            data_2[i] = item;
             list.appendChild(li);
             seed = num;
         }
@@ -228,14 +226,6 @@ function generate() {
     var div3 = document.getElementById("div3");
     div3.style = "padding-top: 8px;";
     div3.innerHTML = "亲爱的" + text + "博士，" + "你的法杖是一根" + data[0] + ", 主体由" + data[1] + "打造，辅以" + data[2] + "，并使用" + data[5] + "进行加工" + "。其施术单元由" + data[3] + "构成，循环及冷却系统是" + data[6] + ", 而核心的源石技艺回路材料是" + data[4] + "。这把法杖的制造的开销在" + data[7] + "，真是一把好法杖！";
-
-    // var div4 = document.getElementById("div4");
-    // div4.style = "padding-top: 8px; padding-bottom: 28px";
-    // div4.innerHTML = "欢迎使用增值服务！经过知名专家鉴定，你的法杖产自于" + data[8] + "，新旧是" + data[9] + "，来自于" + data[11] + "，至于施法的手感，是一种" + data[10] + "。可喜可贺，可喜可贺！";
-
-    // var div5 = document.getElementById("div5")
-    // div5.style = "padding-top: 8px; padding-bottom: 28px"
-    // div5.innerHTML = "增值服务"
 
     var rader_data_1 = {
         labels: titles_short,
