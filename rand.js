@@ -9,65 +9,65 @@ var items = [
         "黑暗剑22",
     ],
     [
-        "攻击力降低",
-        "攻击力不变",
-        "攻击力小幅提升",
-        "攻击力提升",
-        "攻击力大幅提升",
-        "攻击力超大幅提升",
-        "攻击力+330%",
-        "黑暗剑22"
+        "羸弱之至！",
+        "中规中矩",
+        "比你平常的力量稍大",
+        "远大于你的臂力",
+        "甚至能开山裂石！",
+        "甚至能分海造陆！",
+        "甚至能突破星荚！！",
+        "甚至能一击贯穿塔卫二！！"
     ],
     [
-        "停止攻击",
-        "攻击速度降低",
-        "攻击速度不变",
-        "攻击速度小幅提升",
-        "攻击速度提升",
-        "攻击速度超大幅度提升",
-        "攻击变为五及以上连击",
-        "黑暗剑22"
+        "停下攻击，",
+        "树懒级别，",
+        "正常施法级别，",
+        "战到正酣的乒乓球挥拍级别，",
+        "拉特兰冲锋铳的子弹射速级别！",
+        "白金之星的拳头级别！",
+        "突破光速级别！！",
+        "黑暗剑22级别，"
     ],
     [
-        "攻击范围缩小",
-        "攻击范围不变",
-        "攻击范围变化",
-        "攻击范围扩大",
-        "攻击范围进一步扩大",
-        "攻击范围变为全屏",
-        "特殊攻击范围，如无限长直线",
-        "黑暗剑22"
+        "仅仅包含近身，",
+        "和你的臂展相仿，",
+        "延伸到了远方，",
+        "目力所及范围，",
+        "视线之外的也能生效！",
+        "能超出这片大地的范畴！",
+        "泰拉大陆施法能对塔卫二生效！！",
+        "黑暗剑22的范围，"
     ],
     [
-        "瞬时爆发",
-        "短促循环",
-        "充能释放",
-        "长时间待机",
-        "中速回转",
-        "持久型变化",
-        "永续/切换",
-        "黑暗剑22"
+        "一次瞬时爆发，",
+        "一个短促循环，",
+        "普通的充能释放，",
+        "嚼了炫迈一样的持久，",
+        "没有大几十年结束不了！",
+        "伴随你的一生！",
+        "恐怕在时间的尽头也会生效！！",
+        "黑暗剑22的持久，"
     ],
     [
-        "自动恢复",
-        "阻挡增加",
-        "防御/法抗提升",
-        "生命值上限提升",
-        "获得抵抗",
-        "获得屏障/护盾",
-        "持续损失生命值",
-        "黑暗剑22",
+        "自动恢复，",
+        "阻挡增加，",
+        "防御/法抗提升，",
+        "生命值上限提升，",
+        "获得抵抗，",
+        "获得护盾，",
+        "持续损失生命值，",
+        "黑暗剑22，",
     ],
     [
-        "停顿目标",
-        "晕眩/束缚/冰冻/浮空…",
-        "推拉目标",
-        "削减护甲/法抗",
-        "沉默目标",
-        "显隐",
-        "元素损伤",
-        "集火标记",
-        "黑暗剑22",
+        "停顿目标，",
+        "晕眩/束缚/冰冻/浮空…，",
+        "推拉目标，",
+        "削减护甲/法抗，",
+        "沉默目标，",
+        "显隐，",
+        "元素损伤，",
+        "集火标记，",
+        "黑暗剑22，",
     ],
 ];
 
@@ -82,7 +82,7 @@ var titles = [
     "速度",
     "广度",
     "持久度",
-    "己方增益",
+    "自身增益",
     "友方增益",
 ];
 var titles_short = [
@@ -96,7 +96,7 @@ var titles_short = [
     "速度",
     "广度",
     "持久度",
-    "己方增益",
+    "自身增益",
     "友方增益",
 ];
 
@@ -121,6 +121,34 @@ var intervals = [
         [100, 100]
     ],
 ];
+
+var sentence = [
+    ["你即将主修的法术，力度",
+        "速度是",
+        "广度更是",
+        "它的持久度是",
+        "——能让你自己",
+        "带给你同伴的增益是能够",
+        "多么美妙的法术！",
+    ],
+    ["而你可以选择辅修的法术，它力度",
+        "速度是",
+        "广度更是",
+        "它的持久度是",
+        "——能让你自己",
+        "带给你同伴的增益是能够",
+        "多么神奇的法术！"
+    ]
+];
+
+function average(arr) {
+    var sum = 0;
+    for (let i = 0; i < arr.length; i++) {
+        sum += arr[i];
+    }
+    const average = sum / arr.length;
+    return average;
+}
 
 // 定义一个函数，根据输入的字符生成一个种子
 function getSeed(text) {
@@ -152,9 +180,10 @@ function randomInt(seed, range) {
 
 
 function getItem(num, round, entry) {
-    // num是随机数的出值，entry是第几个表格，对应items；round是第一轮还是第二轮，对应intervals
+    // num是随机数的出值，entry是第几个表格，对应哪一个items列表；round是第一轮还是第二轮，对应哪一个intervals列表
+    // num 和intervals[round]里的内容对应，决定index的内容
     // 根据条目获取区间数组
-    var interval = intervals[entry];
+    var interval = intervals[round];
     // 遍历区间数组，找到随机数所在的区间索引
     var index = -1;
     for (var i = 0; i < interval.length; i++) {
@@ -171,12 +200,12 @@ function getItem(num, round, entry) {
     }
 }
 
+var data_1 = [];
+var data_2 = [];
+var data_int_1 = [];
+var data_int_2 = [];
 
 function generate() {
-    var data_1 = [];
-    var data_2 = [];
-    var data_int_1 = [];
-    var data_int_2 = [];
 
     // 获取输入框的值
     var text = document.getElementById("text").value;
@@ -192,61 +221,133 @@ function generate() {
             var num = randomInt(seed, 100);
             data_int_1[i] = num;
             var item = getItem(num, 0, 0);
-            var li = document.createElement("li");
-            li.style = "padding-top: 8px;"
+            // 始终都是第一个列表，所以是num，0，0
+            var li_1 = document.createElement("li");
+            li_1.style = "padding-top: 8px;"
             var div1 = document.createElement("div");
             var div2 = document.createElement("div");
             div1.innerHTML = titles[i] + ": " + item;
             div2.innerHTML = "出值：" + num;
-            li.appendChild(div1);
-            li.appendChild(div2);
+            li_1.appendChild(div1);
+            li_1.appendChild(div2);
             data_1[i] = item;
-            list.appendChild(li);
+            list.appendChild(li_1);
             seed = num;
         }
+
+        var num = average(data_int_1);
+        data_int_1[5] = num;
+        var item = getItem(num, 0, 0);
+        var li_2 = document.createElement("li");
+        li_2.style = "padding-top: 8px;"
+        var div1 = document.createElement("div");
+        var div2 = document.createElement("div");
+        div1.innerHTML = titles[5] + ": " + item;
+        div2.innerHTML = "出值：" + num;
+        li_2.appendChild(div1);
+        li_2.appendChild(div2);
+        data_1[5] = item;
+        list.appendChild(li_2);
+
         for (var i = 0; i < 12; i++) {
             var num = randomInt(seed, 100);
             data_int_2[i] = num;
             var item = getItem(num, 1, 1 + (i % 6));
-            var li = document.createElement("li");
-            li.style = "padding-top: 8px;"
-            var div3 = document.createElement("div");
-            var div4 = document.createElement("div");
-            div3.innerHTML = titles[i] + ": " + item;
-            div4.innerHTML = "出值：" + num;
-            li.appendChild(div1);
-            li.appendChild(div2);
+            var li_3 = document.createElement("li");
+            li_3.style = "padding-top: 8px;"
+            var div1 = document.createElement("div");
+            var div2 = document.createElement("div");
+            div1.innerHTML = titles[6 + (i) % 6] + ": " + item; // 注意这里title[i]的i也是需要更改的
+            div2.innerHTML = "出值：" + num;
+            li_3.appendChild(div1);
+            li_3.appendChild(div2);
             data_2[i] = item;
-            list.appendChild(li);
+            list.appendChild(li_3);
             seed = num;
         }
     }
+    var data_int_1_temp = data_int_1; // sort会改变原本的数组，使用新数组做缓冲
+    // // 但这样不能获取最大值所在位置
+    // var major_1 = data_int_1_temp.sort()[0];
+    // var major_2 = data_int_1_temp.sort()[1];
+
+    var max = Math.max(...data_int_1_temp); // ...这个意思是扩展运算符(...)将数组转换为参数列表
+    var major_1 = data_int_1_temp.indexOf(max);
+    data_int_1_temp[major_1] = -1;
+    var sub_max = Math.max(...data_int_1_temp); // ...这个意思是扩展运算符(...)将数组转换为参数列表
+    var major_2 = data_int_1_temp.indexOf(sub_max);
+
+    data_1 = data_1.concat(data_2); // 拼接，好用的
+    data_int_final_1 = data_int_1.concat(data_int_2.slice(0, 6));
+    data_int_final_2 = data_int_1.concat(data_int_2.slice(6, 12));
 
 
-    var div3 = document.getElementById("div3");
-    div3.style = "padding-top: 8px;";
-    div3.innerHTML = "亲爱的" + text + "博士，" + "你的法杖是一根" + data[0] + ", 主体由" + data[1] + "打造，辅以" + data[2] + "，并使用" + data[5] + "进行加工" + "。其施术单元由" + data[3] + "构成，循环及冷却系统是" + data[6] + ", 而核心的源石技艺回路材料是" + data[4] + "。这把法杖的制造的开销在" + data[7] + "，真是一把好法杖！";
+    var list_of_poem_1 = document.getElementById("list_of_poem_1");
+    sentence[0].forEach((element, index) => {
+        var li_list_of_poem = document.createElement("li");
+        li_list_of_poem.style = "padding-top: 8px;"
+        var div = document.createElement("div");
+        if (element != sentence[0][sentence[0].length - 1])
+            div.innerHTML = element + data_1[6 + index];
+        else div.innerHTML = element;
+        li_list_of_poem.appendChild(div);
+        list_of_poem_1.appendChild(li_list_of_poem);
+    });
+    var list_of_poem_2 = document.getElementById("list_of_poem_2");
+    sentence[1].forEach((element, index) => {
+        var li_list_of_poem = document.createElement("li");
+        li_list_of_poem.style = "padding-top: 8px;"
+        var div = document.createElement("div");
+        if (element != sentence[1][sentence[1].length - 1])
+            div.innerHTML = element + data_1[12 + index];
+        else div.innerHTML = element;
+        li_list_of_poem.appendChild(div);
+        list_of_poem_2.appendChild(li_list_of_poem);
+    });
+
+
+    // var div3 = document.getElementById("div3");
+    // div3.innerHTML = "你即将主修的法术，力度" + data_1[6] + "，速度是" + data_1[7] + "，广度更是" + data_1[8] + "；它的持久度是" + data_1[9] + "——能让你自己" + data_1[10] + "，带给你同伴的增益是能够" + data_1[11] + "！"
+
+    // var div4 = document.getElementById("div4");
+    // div4.innerHTML = "而你可以选择辅修的法术，它力度" + data_1[12] + "，速度是" + data_1[13] + "，广度更是" + data_1[14] + "；它的持久度是" + data_1[15] + "——能让你自己" + data_1[16] + "，带给你同伴的增益是能够" + data_1[17] + "！"
 
     var rader_data_1 = {
         labels: titles_short,
-        datasets: [{ label: text, backgroundColor: "#FF8C00", borderColor: "#FF8C00", data: data_int_1, fill: true }],
+        datasets: [{ label: text + "的第一专业", backgroundColor: "#FF8C00", borderColor: "#FF8C00", data: data_int_final_1, fill: true }],
         // options: { maintainAspectRatio: true, legend: { display: false, labels: { fontStyle: normal } }, title: { fontStyle: bold }, scales: { xAxes: [{ gridLines: { drawTicks: true }, ticks: { fontStyle: normal } }], yAxes: [{ gridLines: { drawTicks: true }, ticks: { fontStyle: normal } }] } }
     };
     var rader_data_2 = {
         labels: titles_short,
-        datasets: [{ label: text, backgroundColor: "#FF8C00", borderColor: "#FF8C00", data: data_int_1, fill: true }],
+        datasets: [{ label: text + "的第二专业", backgroundColor: "#FF8C00", borderColor: "#FF8C00", data: data_int_final_2, fill: true }],
         // options: { maintainAspectRatio: true, legend: { display: false, labels: { fontStyle: normal } }, title: { fontStyle: bold }, scales: { xAxes: [{ gridLines: { drawTicks: true }, ticks: { fontStyle: normal } }], yAxes: [{ gridLines: { drawTicks: true }, ticks: { fontStyle: normal } }] } }
     };
 
     // 获取 canvas 元素
-    var ctx = document.getElementById("radar_pic").getContext("2d");
+    var ctx_1 = document.getElementById("radar_pic_1").getContext("2d");
+    var ctx_2 = document.getElementById("radar_pic_2").getContext("2d");
 
     // 创建一个图表对象
-    var radar_pic_1 = new Chart(ctx, {
+    var radar_pic_1 = new Chart(ctx_1, {
         // 指定图表类型为雷达图
         type: "radar",
         // 指定图表的数据和配置项
         data: rader_data_1, // 使用你提供的数据
+        options: {
+            responsive: true, // 设置图表为响应式，根据屏幕窗口变化而变化
+            maintainAspectRatio: false, // 保持图表原有比例
+            elements: {
+                line: {
+                    borderWidth: 3 // 设置线条宽度
+                }
+            }
+        }
+    });
+    var radar_pic_2 = new Chart(ctx_2, {
+        // 指定图表类型为雷达图
+        type: "radar",
+        // 指定图表的数据和配置项
+        data: rader_data_2, // 使用你提供的数据
         options: {
             responsive: true, // 设置图表为响应式，根据屏幕窗口变化而变化
             maintainAspectRatio: false, // 保持图表原有比例
