@@ -123,22 +123,56 @@ var intervals = [
 ];
 
 var sentence = [
-    ["你即将主修的法术，力度",
+    ["你即将主修的法术",
+        "力度是",
         "速度是",
         "广度更是",
         "它的持久度是",
         "——能让你自己",
         "带给你同伴的增益是能够",
-        "多么美妙的法术！",
+        "哦，多么美妙的法术！",
     ],
-    ["而你可以选择辅修的法术，它力度",
+    ["而你可以选择辅修的法术",
+        "力度是",
         "速度是",
         "广度更是",
         "它的持久度是",
         "——能让你自己",
         "带给你同伴的增益是能够",
-        "多么神奇的法术！"
+        "哦，多么神奇的法术！"
     ]
+];
+
+var majors = [
+    ["你属于咒法化形系，",
+        "那里有埋藏在心底的勇敢，",
+        "他们的胆识、气魄和豪爽，",
+        "使咒法化形出类拔萃；"
+    ],
+
+    ["你属于塑能转化系，",
+        "那里的人正直忠诚，",
+        "塑能转化的学子们坚忍诚实，",
+        "不畏惧艰辛的劳动；"
+    ],
+
+    ["你属于塑形重构系，",
+        "那里的人正直忠诚，",
+        "塑形重构的学子们坚忍诚实，",
+        "不畏惧艰辛的劳动；"
+    ],
+
+    ["你头脑精明，",
+        "会进智慧的老生理变化系，",
+        "那些睿智博学的人，",
+        "总会在那里遇见他们的同道；"
+    ],
+
+    ["你会进传心感知系，",
+        "也许你在这里交上真诚的朋友，",
+        "但那些狡诈阴险之辈却会不惜一切手段，",
+        "去达到他们的目的；"
+    ],
 ];
 
 function average(arr) {
@@ -282,25 +316,50 @@ function generate() {
     data_int_final_2 = data_int_1.concat(data_int_2.slice(6, 12));
 
 
+
+
+    var list_of_major_1 = document.getElementById("list_of_major_1");
     var list_of_poem_1 = document.getElementById("list_of_poem_1");
+    majors[major_1].forEach((element, index) => {
+        var li_list_of_poem = document.createElement("li");
+        li_list_of_poem.style = "padding-top: 8px;"
+        var div = document.createElement("div");
+        div.innerHTML = element;
+        li_list_of_poem.appendChild(div);
+        list_of_major_1.appendChild(li_list_of_poem);
+    });
     sentence[0].forEach((element, index) => {
         var li_list_of_poem = document.createElement("li");
         li_list_of_poem.style = "padding-top: 8px;"
         var div = document.createElement("div");
-        if (element != sentence[0][sentence[0].length - 1])
-            div.innerHTML = element + data_1[6 + index];
-        else div.innerHTML = element;
+        if (element == sentence[0][sentence[0].length - 1])
+            div.innerHTML = element;
+        else if (index == 0)
+            div.innerHTML = element + titles[major_1];
+        else div.innerHTML = element + data_1[6 + index];
         li_list_of_poem.appendChild(div);
         list_of_poem_1.appendChild(li_list_of_poem);
     });
+
+    var list_of_major_2 = document.getElementById("list_of_major_2");
     var list_of_poem_2 = document.getElementById("list_of_poem_2");
+    majors[major_2].forEach((element, index) => {
+        var li_list_of_poem = document.createElement("li");
+        li_list_of_poem.style = "padding-top: 8px;"
+        var div = document.createElement("div");
+        div.innerHTML = element;
+        li_list_of_poem.appendChild(div);
+        list_of_major_2.appendChild(li_list_of_poem);
+    });
     sentence[1].forEach((element, index) => {
         var li_list_of_poem = document.createElement("li");
         li_list_of_poem.style = "padding-top: 8px;"
         var div = document.createElement("div");
-        if (element != sentence[1][sentence[1].length - 1])
-            div.innerHTML = element + data_1[12 + index];
-        else div.innerHTML = element;
+        if (element == sentence[1][sentence[1].length - 1])
+            div.innerHTML = element;
+        else if (index == 0)
+            div.innerHTML = element + titles[major_1];
+        else div.innerHTML = element + data_1[12 + index];
         li_list_of_poem.appendChild(div);
         list_of_poem_2.appendChild(li_list_of_poem);
     });
