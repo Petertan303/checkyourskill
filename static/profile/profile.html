@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+{% load static %}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Dashboard - Brand</title>
+    <link rel="stylesheet" href={% stastic "profile/bootstrap/css/bootstrap.min.css" %}>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
+    <link rel="stylesheet" href={% static "profile/fonts/fontawesome-all.min.css" %}>
+</head>
+
+<body id="page-top">
+    <div id="wrapper">
+        <nav class="navbar align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0 navbar-dark" style="width: 90px;">
+            <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+                    <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-laugh-wink"></i></div>
+                    <div class="sidebar-brand-text mx-3"><span>Brand</span></div>
+                </a>
+                <hr class="sidebar-divider my-0">
+                <ul class="navbar-nav text-light" id="accordionSidebar">
+                    <li class="nav-item"><a class="nav-link" style="margin-right: -15px;padding-left: 5px;margin-bottom: 0px;"><i class="fas fa-user" style="width: 11.9;"></i><span>Profile</span></a></li>
+                    <li class="nav-item"><a class="nav-link" style="margin-right: -15px;padding-left: 5px;"><i class="fas fa-clipboard" style="width: 11.9px;margin-right: 2px;padding-left: 0px;margin-left: 0px;"></i><span style="padding-left: 0px;margin-left: 2px;">Grades</span></a></li>
+                    <li class="nav-item"><a class="nav-link" style="margin-right: -15px;padding-left: 5px;"><i class="fas fa-microphone" style="width: 11.9px;"></i><span>Speaking Test</span></a></li>
+                    <li class="nav-item"><a class="nav-link" style="margin-right: -15px;padding-left: 5px;"><i class="fas fa-cog"></i><span>Settings</span></a></li>
+                </ul>
+                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
+            </div>
+        </nav>
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <nav class="navbar navbar-expand bg-white shadow mb-4 topbar static-top navbar-light">
+                    <div class="container-fluid">
+                        <ul class="navbar-nav flex-nowrap ms-auto">
+                            <li class="nav-item dropdown no-arrow mx-1">
+                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span class="badge bg-danger badge-counter">7</span><i class="fas fa-envelope fa-fw"></i></a>
+                                    <div class="dropdown-menu dropdown-menu-end dropdown-list animated--grow-in">
+                                        <h6 class="dropdown-header">alerts center</h6><a class="dropdown-item d-flex align-items-center" href="#">
+                                            <div class="text-truncate">
+                                                <div><span>Hi there! I am wondering if you can help me with a problem I've been having.</span></div>
+                                                <p class="small text-gray-500 mb-0">Jae Chun - 1d</p>
+                                            </div>
+                                        </a><a class="dropdown-item d-flex align-items-center" href="#">
+                                            <div class="fw-bold">
+                                                <div class="text-truncate"><span>I have the photos that you ordered last month!</span></div>
+                                                <p class="small text-gray-500 mb-0">Jae Chun - 1d</p>
+                                            </div>
+                                        </a><a class="dropdown-item d-flex align-items-center" href="#">
+                                            <div class="fw-bold">
+                                                <div class="text-truncate"><span>Last month's report looks great, I am very happy with the progress so far, keep up the good work!</span></div>
+                                                <p class="small text-gray-500 mb-0">Morgan Alvarez - 2d</p>
+                                            </div>
+                                        </a><a class="dropdown-item d-flex align-items-center" href="#">
+                                            <div class="fw-bold">
+                                                <div class="text-truncate"><span>Am I a good boy? The reason I ask is because someone told me that people say this to all dogs, even if they aren't good...</span></div>
+                                                <p class="small text-gray-500 mb-0">Chicken the Dog · 2w</p>
+                                            </div>
+                                        </a><a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                                    </div>
+                                </div>
+                                <div class="shadow dropdown-list dropdown-menu dropdown-menu-end" aria-labelledby="alertsDropdown"></div>
+                            </li>
+                            <div class="d-none d-sm-block topbar-divider"></div>
+                            <li class="nav-item dropdown no-arrow">
+                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span class="d-none d-lg-inline me-2 text-gray-600 small">Name</span><img class="border rounded-circle img-profile" src="https://ts1.cn.mm.bing.net/th/id/R-C.5cf32306964edb85eee97858641bbaa5?rik=Qfaaz3ebjRMrAg&amp;riu=http%3a%2f%2fpic.616pic.com%2fys_img%2f00%2f04%2f45%2fB98tg4SeIs.jpg&amp;ehk=KWu4l1ltCRmNh4nwz8gwopU65thfexHaIZo9NmMBdVs%3d&amp;risl=&amp;pid=ImgRaw&amp;r=0&amp;sres=1&amp;sresct=1"></a>
+                                    <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in"><a class="dropdown-item" href="#"><i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Profile</a><a class="dropdown-item" href="#"><i class="fas fa-cogs fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Settings</a>
+                                        <div class="dropdown-divider"></div><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                <div class="container-fluid">
+                    <div class="d-sm-flex justify-content-between align-items-center mb-4">
+                        <h3 class="text-dark mb-0">Profile</h3>
+                    </div>
+                    <div class="row" style="color: var(--bs-emphasis-color);border-width: 1px;border-color: var(--bs-body-color);">
+                        <div class="col-xl-1 d-flex d-sm-flex d-xl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-xl-center align-items-xl-center" style="height: 50px;width: 100.7px;border: 0.5px solid var(--bs-body-color) ;"><span>Name</span></div>
+                        <div class="col d-flex d-sm-flex d-xl-flex align-items-center justify-content-sm-start align-items-sm-center justify-content-xl-start align-items-xl-center" style="width: 200.3px;border: 0.5px solid var(--bs-body-color);border-radius: 0px;">
+                            <div><span class="text-center">Text</span></div>
+                        </div>
+                    </div>
+                    <div class="row" style="color: var(--bs-emphasis-color);border-color: var(--bs-body-color);">
+                        <div class="col-xl-2 d-flex d-sm-flex d-xl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-xl-center align-items-xl-center" style="height: 50px;width: 100.7px;border: 0.5px solid var(--bs-body-color) ;"><span>Gender</span></div>
+                        <div class="col d-flex d-sm-flex d-xl-flex align-items-center justify-content-sm-start align-items-sm-center align-items-xl-center" style="width: 200.3px;border: 0.5px solid var(--bs-body-color) ;">
+                            <div><span>Text</span></div>
+                        </div>
+                    </div>
+                    <div class="row" style="color: var(--bs-emphasis-color);border-color: var(--bs-body-color);">
+                        <div class="col-xl-2 d-flex d-sm-flex d-xl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-xl-center align-items-xl-center" style="height: 50px;width: 100.7px;border: 0.5px solid var(--bs-body-color) ;"><span>Class</span></div>
+                        <div class="col d-flex d-sm-flex d-xl-flex align-items-center justify-content-sm-start align-items-sm-center align-items-xl-center" style="width: 200.3px;border: 0.5px solid var(--bs-body-color) ;">
+                            <div><span>Text</span></div>
+                        </div>
+                    </div>
+                    <div class="row" style="color: var(--bs-emphasis-color);border-color: var(--bs-body-color);">
+                        <div class="col-xl-2 d-flex d-sm-flex d-xl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-xl-center align-items-xl-center" style="height: 50px;width: 100.7px;border: 0.5px solid var(--bs-body-color) ;"><span class="text-center">Student Number</span></div>
+                        <div class="col d-flex d-sm-flex d-xl-flex align-items-center justify-content-sm-start align-items-sm-center align-items-xl-center" style="width: 200.3px;border: 0.5px solid var(--bs-body-color) ;">
+                            <div><span>Text</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src={% static "profile/bootstrap/js/bootstrap.min.js" %}></script>
+</body>
+
+</html>
