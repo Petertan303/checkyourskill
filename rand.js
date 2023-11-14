@@ -175,10 +175,10 @@ function getItem(num, entry) {
 }
 
 
-// 定义一个函数，生成十个随机数，并显示在列表中
 function generate() {
     var data = [];
-    var data_int = [];
+    var data_int_1 = [];
+    var data_int_2 = [];
 
     // 获取输入框的值
     var text = document.getElementById("text").value;
@@ -190,26 +190,36 @@ function generate() {
     if (text != "") {
         // 根据输入的字符获取种子
         var seed = getSeed(text);
-        for (var i = 0; i < 17; i++) {
+        for (var i = 0; i < 5; i++) {
             var num = randomInt(seed, 100);
-            data_int[i] = num;
-            // 根据随机数和条目获取对应的字符
-            var item = getItem(num, i);
-            // 创建一个列表项元素
+            data_int_1[i] = num;
+            var item = getItem(num, 0);
             var li = document.createElement("li");
             li.style = "padding-top: 8px;"
             var div1 = document.createElement("div");
             var div2 = document.createElement("div");
-            // 设置列表项的内容为条目、随机数和字符
-            // li.innerHTML = titles[i] + "：" + num + " " + item;
             div1.innerHTML = titles[i] + ": " + item;
             div2.innerHTML = "出值：" + num;
             li.appendChild(div1);
             li.appendChild(div2);
             data[i] = item;
-            // 将列表项添加到列表中
             list.appendChild(li);
-            // 更新种子为随机数
+            seed = num;
+        }
+        for (var i = 0; i < 12; i++) {
+            var num = randomInt(seed, 100);
+            data_int_2[i] = num;
+            var item = getItem(num, 1);
+            var li = document.createElement("li");
+            li.style = "padding-top: 8px;"
+            var div3 = document.createElement("div");
+            var div4 = document.createElement("div");
+            div3.innerHTML = titles[i] + ": " + item;
+            div4.innerHTML = "出值：" + num;
+            li.appendChild(div1);
+            li.appendChild(div2);
+            data[i] = item;
+            list.appendChild(li);
             seed = num;
         }
     }
@@ -227,9 +237,14 @@ function generate() {
     // div5.style = "padding-top: 8px; padding-bottom: 28px"
     // div5.innerHTML = "增值服务"
 
-    var rader_data = {
+    var rader_data_1 = {
         labels: titles_short,
-        datasets: [{ label: text, backgroundColor: "#FF8C00", borderColor: "#FF8C00", data: data_int, fill: true }],
+        datasets: [{ label: text, backgroundColor: "#FF8C00", borderColor: "#FF8C00", data: data_int_1, fill: true }],
+        // options: { maintainAspectRatio: true, legend: { display: false, labels: { fontStyle: normal } }, title: { fontStyle: bold }, scales: { xAxes: [{ gridLines: { drawTicks: true }, ticks: { fontStyle: normal } }], yAxes: [{ gridLines: { drawTicks: true }, ticks: { fontStyle: normal } }] } }
+    };
+    var rader_data_2 = {
+        labels: titles_short,
+        datasets: [{ label: text, backgroundColor: "#FF8C00", borderColor: "#FF8C00", data: data_int_1, fill: true }],
         // options: { maintainAspectRatio: true, legend: { display: false, labels: { fontStyle: normal } }, title: { fontStyle: bold }, scales: { xAxes: [{ gridLines: { drawTicks: true }, ticks: { fontStyle: normal } }], yAxes: [{ gridLines: { drawTicks: true }, ticks: { fontStyle: normal } }] } }
     };
 
@@ -237,11 +252,11 @@ function generate() {
     var ctx = document.getElementById("radar_pic").getContext("2d");
 
     // 创建一个图表对象
-    var radar_pic = new Chart(ctx, {
+    var radar_pic_1 = new Chart(ctx, {
         // 指定图表类型为雷达图
         type: "radar",
         // 指定图表的数据和配置项
-        data: rader_data, // 使用你提供的数据
+        data: rader_data_1, // 使用你提供的数据
         options: {
             responsive: true, // 设置图表为响应式，根据屏幕窗口变化而变化
             maintainAspectRatio: false, // 保持图表原有比例
