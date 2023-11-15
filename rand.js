@@ -198,18 +198,18 @@ function getSeed(text) {
 }
 
 // 定义一个函数，根据种子和范围生成一个随机整数
-function randomInt(seed, range) {
+function randomInt(seed) {
     // 使用线性同余法生成随机数序列
     // 设置参数a, b, m
     var a = 25214903917;
     var b = 11;
-    var m = range;
+    var m = 2 ^ 48 - 1;
     // 计算下一个随机数
     var next = (a * seed + b) % m;
     // 将随机数加一，得到一个1-range的整数
-    var num = next + 1;
+    var num = next - 1;
     // 返回随机数
-    return num;
+    return Math.abs(num);
 }
 
 
@@ -238,6 +238,9 @@ var data_1 = [];
 var data_2 = [];
 var data_int_1 = [];
 var data_int_2 = [];
+var major_1;
+var major_2;
+var dataset_of_radar = [];
 
 function generate() {
 
@@ -252,7 +255,8 @@ function generate() {
         // 根据输入的字符获取种子
         var seed = getSeed(text);
         for (var i = 0; i < 5; i++) {
-            var num = randomInt(seed, 100);
+            var num_ori = randomInt(seed);
+            var num = num_ori % 100;
             data_int_1[i] = num;
             var item = getItem(num, 0, 0);
             // 始终都是第一个列表，所以是num，0，0
@@ -269,7 +273,7 @@ function generate() {
             seed = num;
         }
 
-        var num = average(data_int_1);
+        var num = Math.trunc(average(data_int_1));
         data_int_1[5] = num;
         var item = getItem(num, 0, 0);
         var li_2 = document.createElement("li");
@@ -284,7 +288,8 @@ function generate() {
         list.appendChild(li_2);
 
         for (var i = 0; i < 12; i++) {
-            var num = randomInt(seed, 100);
+            var num_ori = randomInt(seed);
+            var num = num_ori % 100;
             data_int_2[i] = num;
             var item = getItem(num, 1, 1 + (i % 6));
             var li_3 = document.createElement("li");
@@ -306,12 +311,12 @@ function generate() {
     // var major_2 = data_int_1_temp.sort()[1];
 
     var max = Math.max(...data_int_1_temp); // ...这个意思是扩展运算符(...)将数组转换为参数列表
-    var major_1 = data_int_1_temp.indexOf(max);
+    major_1 = data_int_1_temp.indexOf(max) - 1;
     data_int_1_temp[major_1] = -1;
     var sub_max = Math.max(...data_int_1_temp); // ...这个意思是扩展运算符(...)将数组转换为参数列表
-    var major_2 = data_int_1_temp.indexOf(sub_max);
+    major_2 = data_int_1_temp.indexOf(sub_max) - 1;
 
-    data_1 = data_1.concat(data_2); // 拼接，好用的
+    data_final = data_1.concat(data_2); // 拼接，好用的
     data_int_final_1 = data_int_1.concat(data_int_2.slice(0, 6));
     data_int_final_2 = data_int_1.concat(data_int_2.slice(6, 12));
 
@@ -336,7 +341,7 @@ function generate() {
             div.innerHTML = element;
         else if (index == 0)
             div.innerHTML = element + titles[major_1];
-        else div.innerHTML = element + data_1[6 + index];
+        else div.innerHTML = element + data_final[5 + index];
         li_list_of_poem.appendChild(div);
         list_of_poem_1.appendChild(li_list_of_poem);
     });
@@ -359,7 +364,7 @@ function generate() {
             div.innerHTML = element;
         else if (index == 0)
             div.innerHTML = element + titles[major_1];
-        else div.innerHTML = element + data_1[12 + index];
+        else div.innerHTML = element + data_final[11 + index];
         li_list_of_poem.appendChild(div);
         list_of_poem_2.appendChild(li_list_of_poem);
     });
@@ -370,21 +375,33 @@ function generate() {
 
     // var div4 = document.getElementById("div4");
     // div4.innerHTML = "而你可以选择辅修的法术，它力度" + data_1[12] + "，速度是" + data_1[13] + "，广度更是" + data_1[14] + "；它的持久度是" + data_1[15] + "——能让你自己" + data_1[16] + "，带给你同伴的增益是能够" + data_1[17] + "！"
-
+    dataset_of_radar = [
+        { label: text + "的各个专业", backgroundColor: 'rgb(255, 140, 0, 0.2)', borderColor: "#FF8C00", data: data_int_1, fill: true },
+        { label: text + "的第一专业", backgroundColor: 'rgb(255, 140, 140, 0.2)', borderColor: "#FF8C90", data: data_int_final_1, fill: true },
+        { label: text + "的第二专业", backgroundColor: 'rgb(255, 140, 255, 0.2)', borderColor: "#FF8Cff", data: data_int_final_2, fill: true },
+    ];
     var rader_data_1 = {
-        labels: titles_short,
-        datasets: [{ label: text + "的第一专业", backgroundColor: "#FF8C00", borderColor: "#FF8C00", data: data_int_final_1, fill: true }],
+        labels: titles_short.slice(0, 6),
+        datasets: dataset_of_radar,
         // options: { maintainAspectRatio: true, legend: { display: false, labels: { fontStyle: normal } }, title: { fontStyle: bold }, scales: { xAxes: [{ gridLines: { drawTicks: true }, ticks: { fontStyle: normal } }], yAxes: [{ gridLines: { drawTicks: true }, ticks: { fontStyle: normal } }] } }
     };
-    var rader_data_2 = {
-        labels: titles_short,
-        datasets: [{ label: text + "的第二专业", backgroundColor: "#FF8C00", borderColor: "#FF8C00", data: data_int_final_2, fill: true }],
-        // options: { maintainAspectRatio: true, legend: { display: false, labels: { fontStyle: normal } }, title: { fontStyle: bold }, scales: { xAxes: [{ gridLines: { drawTicks: true }, ticks: { fontStyle: normal } }], yAxes: [{ gridLines: { drawTicks: true }, ticks: { fontStyle: normal } }] } }
-    };
+    // var rader_data_2 = {
+    //     labels: titles_short,
+    //     datasets: [{ label: text + "的第一专业", backgroundColor: "#FF8C00", borderColor: "#FF8C00", data: data_int_final_2, fill: false }],
+    //     // options: { maintainAspectRatio: true, legend: { display: false, labels: { fontStyle: normal } }, title: { fontStyle: bold }, scales: { xAxes: [{ gridLines: { drawTicks: true }, ticks: { fontStyle: normal } }], yAxes: [{ gridLines: { drawTicks: true }, ticks: { fontStyle: normal } }] } }
+    // };
+    // var rader_data_3 = {
+    //     labels: titles_short,
+    //     datasets: [{ label: text + "的第二专业", backgroundColor: "#FF8C00", borderColor: "#FF8C00", data: data_int_final_2, fill: false }],
+    //     // options: { maintainAspectRatio: true, legend: { display: false, labels: { fontStyle: normal } }, title: { fontStyle: bold }, scales: { xAxes: [{ gridLines: { drawTicks: true }, ticks: { fontStyle: normal } }], yAxes: [{ gridLines: { drawTicks: true }, ticks: { fontStyle: normal } }] } }
+    // };
+
+    // dataset_of_radar = [rader_data_1, rader_data_2, rader_data_3];
 
     // 获取 canvas 元素
     var ctx_1 = document.getElementById("radar_pic_1").getContext("2d");
-    var ctx_2 = document.getElementById("radar_pic_2").getContext("2d");
+    // var ctx_2 = document.getElementById("radar_pic_2").getContext("2d");
+    // var ctx_3 = document.getElementById("radar_pic_3").getContext("2d");
 
     // 创建一个图表对象
     var radar_pic_1 = new Chart(ctx_1, {
@@ -402,19 +419,34 @@ function generate() {
             }
         }
     });
-    var radar_pic_2 = new Chart(ctx_2, {
-        // 指定图表类型为雷达图
-        type: "radar",
-        // 指定图表的数据和配置项
-        data: rader_data_2, // 使用你提供的数据
-        options: {
-            responsive: true, // 设置图表为响应式，根据屏幕窗口变化而变化
-            maintainAspectRatio: false, // 保持图表原有比例
-            elements: {
-                line: {
-                    borderWidth: 3 // 设置线条宽度
-                }
-            }
-        }
-    });
+    // var radar_pic_2 = new Chart(ctx_2, {
+    //     // 指定图表类型为雷达图
+    //     type: "radar",
+    //     // 指定图表的数据和配置项
+    //     data: rader_data_2, // 使用你提供的数据
+    //     options: {
+    //         responsive: true, // 设置图表为响应式，根据屏幕窗口变化而变化
+    //         maintainAspectRatio: false, // 保持图表原有比例
+    //         elements: {
+    //             line: {
+    //                 borderWidth: 3 // 设置线条宽度
+    //             }
+    //         }
+    //     }
+    // });
+    // var radar_pic_3 = new Chart(ctx_3, {
+    //     // 指定图表类型为雷达图
+    //     type: "radar",
+    //     // 指定图表的数据和配置项
+    //     data: rader_data_3, // 使用你提供的数据
+    //     options: {
+    //         responsive: true, // 设置图表为响应式，根据屏幕窗口变化而变化
+    //         maintainAspectRatio: false, // 保持图表原有比例
+    //         elements: {
+    //             line: {
+    //                 borderWidth: 3 // 设置线条宽度
+    //             }
+    //         }
+    //     }
+    // });
 }
