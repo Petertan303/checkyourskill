@@ -210,9 +210,11 @@ function getSeed(text) {
 function randomInt(seed) {
     // 使用线性同余法生成随机数序列
     // 设置参数a, b, m
-    var a = 25214903917;
+    // var a = 25214903917;
+    var a = 3128;
     var b = 11;
-    var m = 2 ^ 48 - 1;
+    // var m = 2 ^ 48;
+    var m = 114514;
     // 计算下一个随机数
     var next = (a * seed + b) % m;
     // 将随机数加一，得到一个1-range的整数
