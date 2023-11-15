@@ -260,63 +260,100 @@ function generate() {
     var text = document.getElementById("text").value;
     // 获取列表的元素
     var list = document.getElementById("list");
+    var list_special = document.getElementById("list_special");
     // 清空列表的内容
     list.innerHTML = "";
+    list_special.innerHTML = "";
     // 如果输入框不为空，才进行生成
     if (text != "") {
-        // 根据输入的字符获取种子
-        var seed = getSeed(text);
-        for (var i = 0; i < 5; i++) {
-            var num_ori = randomInt(seed);
-            var num = num_ori % 100;
-            data_int_1[i] = num;
+        if (String(text).includes('赫尔昏佐伦') || String(text).includes('巫王')) {
+            for (var i = 0; i < 6; i++) {
+                var num = 100;
+                data_int_1[i] = num;
+                var item = getItem(num, 0, 0);
+                // 始终都是第一个列表，所以是num，0，0
+                var li_1 = document.createElement("li");
+                li_1.style = "padding-top: 8px;"
+                var div1 = document.createElement("div");
+                var div2 = document.createElement("div");
+                div1.innerHTML = titles[i] + ": " + item;
+                div2.innerHTML = "出值：" + num;
+                li_1.appendChild(div1);
+                li_1.appendChild(div2);
+                data_1[i] = item;
+                list.appendChild(li_1);
+            }
+            for (var i = 0; i < 12; i++) {
+                var num = 100;
+                data_int_2[i] = num;
+                var item = getItem(num, 1, 1 + (i % 6));
+                var li_3 = document.createElement("li");
+                li_3.style = "padding-top: 8px;"
+                var div1 = document.createElement("div");
+                var div2 = document.createElement("div");
+                div1.innerHTML = titles[6 + (i) % 6] + ": " + item; // 注意这里title[i]的i也是需要更改的
+                div2.innerHTML = "出值：" + num;
+                li_3.appendChild(div1);
+                li_3.appendChild(div2);
+                data_2[i] = item;
+                list.appendChild(li_3);
+            }
+        } else {
+            // 根据输入的字符获取种子
+            var seed = getSeed(text);
+            for (var i = 0; i < 5; i++) {
+                var num_ori = randomInt(seed);
+                var num = num_ori % 100;
+                data_int_1[i] = num;
+                var item = getItem(num, 0, 0);
+                // 始终都是第一个列表，所以是num，0，0
+                var li_1 = document.createElement("li");
+                li_1.style = "padding-top: 8px;"
+                var div1 = document.createElement("div");
+                var div2 = document.createElement("div");
+                div1.innerHTML = titles[i] + ": " + item;
+                div2.innerHTML = "出值：" + num;
+                li_1.appendChild(div1);
+                li_1.appendChild(div2);
+                data_1[i] = item;
+                list.appendChild(li_1);
+                seed = num_ori;
+            }
+
+            var num = Math.trunc(average(data_int_1));
+            data_int_1[5] = num;
             var item = getItem(num, 0, 0);
-            // 始终都是第一个列表，所以是num，0，0
-            var li_1 = document.createElement("li");
-            li_1.style = "padding-top: 8px;"
+            var li_2 = document.createElement("li");
+            li_2.style = "padding-top: 8px;"
             var div1 = document.createElement("div");
             var div2 = document.createElement("div");
-            div1.innerHTML = titles[i] + ": " + item;
+            div1.innerHTML = titles[5] + ": " + item;
             div2.innerHTML = "出值：" + num;
-            li_1.appendChild(div1);
-            li_1.appendChild(div2);
-            data_1[i] = item;
-            list.appendChild(li_1);
-            seed = num_ori;
-        }
+            li_2.appendChild(div1);
+            li_2.appendChild(div2);
+            data_1[5] = item;
+            list.appendChild(li_2);
 
-        var num = Math.trunc(average(data_int_1));
-        data_int_1[5] = num;
-        var item = getItem(num, 0, 0);
-        var li_2 = document.createElement("li");
-        li_2.style = "padding-top: 8px;"
-        var div1 = document.createElement("div");
-        var div2 = document.createElement("div");
-        div1.innerHTML = titles[5] + ": " + item;
-        div2.innerHTML = "出值：" + num;
-        li_2.appendChild(div1);
-        li_2.appendChild(div2);
-        data_1[5] = item;
-        list.appendChild(li_2);
-
-        for (var i = 0; i < 12; i++) {
-            var num_ori = randomInt(seed);
-            var num = num_ori % 100;
-            data_int_2[i] = num;
-            var item = getItem(num, 1, 1 + (i % 6));
-            var li_3 = document.createElement("li");
-            li_3.style = "padding-top: 8px;"
-            var div1 = document.createElement("div");
-            var div2 = document.createElement("div");
-            div1.innerHTML = titles[6 + (i) % 6] + ": " + item; // 注意这里title[i]的i也是需要更改的
-            div2.innerHTML = "出值：" + num;
-            li_3.appendChild(div1);
-            li_3.appendChild(div2);
-            data_2[i] = item;
-            list.appendChild(li_3);
-            seed = num_ori;
+            for (var i = 0; i < 12; i++) {
+                var num_ori = randomInt(seed);
+                var num = num_ori % 100;
+                data_int_2[i] = num;
+                var item = getItem(num, 1, 1 + (i % 6));
+                var li_3 = document.createElement("li");
+                li_3.style = "padding-top: 8px;"
+                var div1 = document.createElement("div");
+                var div2 = document.createElement("div");
+                div1.innerHTML = titles[6 + (i) % 6] + ": " + item; // 注意这里title[i]的i也是需要更改的
+                div2.innerHTML = "出值：" + num;
+                li_3.appendChild(div1);
+                li_3.appendChild(div2);
+                data_2[i] = item;
+                list.appendChild(li_3);
+                seed = num_ori;
+            }
         }
     }
+
     var data_int_1_temp = []; // sort会改变原本的数组，使用新数组做缓冲
     data_int_1.forEach((element, index) => {
         data_int_1_temp[index] = element;
@@ -335,54 +372,64 @@ function generate() {
     data_int_final_1 = data_int_1.concat(data_int_2.slice(0, 6));
     data_int_final_2 = data_int_1.concat(data_int_2.slice(6, 12));
 
-
-
-
-    var list_of_major_1 = document.getElementById("list_of_major_1");
-    var list_of_poem_1 = document.getElementById("list_of_poem_1");
-    majors[major_1].forEach((element, index) => {
-        var li_list_of_poem = document.createElement("li");
-        li_list_of_poem.style = "padding-top: 8px;"
-        var div = document.createElement("div");
-        div.innerHTML = element;
-        li_list_of_poem.appendChild(div);
-        list_of_major_1.appendChild(li_list_of_poem);
-    });
-    sentence[0].forEach((element, index) => {
-        var li_list_of_poem = document.createElement("li");
-        li_list_of_poem.style = "padding-top: 8px;"
-        var div = document.createElement("div");
-        if (element == sentence[0][sentence[0].length - 1])
+    if (String(text).includes('赫尔昏佐伦') || String(text).includes('巫王')) {
+        var li_king = document.createElement("li");
+        var div1_king = document.createElement("h3");
+        div1_king.innerHTML = "……巫王殿下，您来做什么？"
+        li_king.style = "padding-top: 18px;"
+        li_king.appendChild(div1_king);
+        list_special.appendChild(li_king);
+    } else {
+        var list_of_major_1 = document.getElementById("list_of_major_1");
+        var list_of_poem_1 = document.getElementById("list_of_poem_1");
+        list_of_major_1.innerHTML = "";
+        list_of_poem_1.innerHTML = ""; // 需要清空，否则会重复
+        majors[major_1].forEach((element, index) => {
+            var li_list_of_poem = document.createElement("li");
+            li_list_of_poem.style = "padding-top: 8px;"
+            var div = document.createElement("div");
             div.innerHTML = element;
-        else if (index == 0)
-            div.innerHTML = element + titles[major_1];
-        else div.innerHTML = element + data_final[5 + index];
-        li_list_of_poem.appendChild(div);
-        list_of_poem_1.appendChild(li_list_of_poem);
-    });
+            li_list_of_poem.appendChild(div);
+            list_of_major_1.appendChild(li_list_of_poem);
+        });
+        sentence[0].forEach((element, index) => {
+            var li_list_of_poem = document.createElement("li");
+            li_list_of_poem.style = "padding-top: 8px;"
+            var div = document.createElement("div");
+            if (element == sentence[0][sentence[0].length - 1])
+                div.innerHTML = element;
+            else if (index == 0)
+                div.innerHTML = element + titles[major_1];
+            else div.innerHTML = element + data_final[5 + index];
+            li_list_of_poem.appendChild(div);
+            list_of_poem_1.appendChild(li_list_of_poem);
+        });
 
-    var list_of_major_2 = document.getElementById("list_of_major_2");
-    var list_of_poem_2 = document.getElementById("list_of_poem_2");
-    majors[major_2].forEach((element, index) => {
-        var li_list_of_poem = document.createElement("li");
-        li_list_of_poem.style = "padding-top: 8px;"
-        var div = document.createElement("div");
-        div.innerHTML = element;
-        li_list_of_poem.appendChild(div);
-        list_of_major_2.appendChild(li_list_of_poem);
-    });
-    sentence[1].forEach((element, index) => {
-        var li_list_of_poem = document.createElement("li");
-        li_list_of_poem.style = "padding-top: 8px;"
-        var div = document.createElement("div");
-        if (element == sentence[1][sentence[1].length - 1])
+        var list_of_major_2 = document.getElementById("list_of_major_2");
+        var list_of_poem_2 = document.getElementById("list_of_poem_2");
+        list_of_major_2.innerHTML = "";
+        list_of_poem_2.innerHTML = "";
+        majors[major_2].forEach((element, index) => {
+            var li_list_of_poem = document.createElement("li");
+            li_list_of_poem.style = "padding-top: 8px;"
+            var div = document.createElement("div");
             div.innerHTML = element;
-        else if (index == 0)
-            div.innerHTML = element + titles[major_1];
-        else div.innerHTML = element + data_final[11 + index];
-        li_list_of_poem.appendChild(div);
-        list_of_poem_2.appendChild(li_list_of_poem);
-    });
+            li_list_of_poem.appendChild(div);
+            list_of_major_2.appendChild(li_list_of_poem);
+        });
+        sentence[1].forEach((element, index) => {
+            var li_list_of_poem = document.createElement("li");
+            li_list_of_poem.style = "padding-top: 8px;"
+            var div = document.createElement("div");
+            if (element == sentence[1][sentence[1].length - 1])
+                div.innerHTML = element;
+            else if (index == 0)
+                div.innerHTML = element + titles[major_1];
+            else div.innerHTML = element + data_final[11 + index];
+            li_list_of_poem.appendChild(div);
+            list_of_poem_2.appendChild(li_list_of_poem);
+        });
+    }
 
 
     // var div3 = document.getElementById("div3");
