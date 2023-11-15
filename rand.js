@@ -380,20 +380,21 @@ function generate() {
     // var div4 = document.getElementById("div4");
     // div4.innerHTML = "而你可以选择辅修的法术，它力度" + data_1[12] + "，速度是" + data_1[13] + "，广度更是" + data_1[14] + "；它的持久度是" + data_1[15] + "——能让你自己" + data_1[16] + "，带给你同伴的增益是能够" + data_1[17] + "！"
     dataset_of_radar = [
-        { label: text + "的各个专业", backgroundColor: 'rgb(255, 140, 0, 0.2)', borderColor: "#FF8C00", data: data_int_1, fill: true },
         { label: text + "的第一专业", backgroundColor: 'rgb(255, 140, 140, 0.2)', borderColor: "#FF8C90", data: data_int_final_1, fill: true },
         { label: text + "的第二专业", backgroundColor: 'rgb(255, 140, 255, 0.2)', borderColor: "#FF8Cff", data: data_int_final_2, fill: true },
     ];
     var rader_data_1 = {
         labels: titles_short.slice(0, 6),
+        datasets: [
+            { label: text + "的各个专业", backgroundColor: 'rgb(255, 140, 0, 0.2)', borderColor: "#FF8C00", data: data_int_1, fill: true },
+        ],
+        // options: { maintainAspectRatio: true, legend: { display: false, labels: { fontStyle: normal } }, title: { fontStyle: bold }, scales: { xAxes: [{ gridLines: { drawTicks: true }, ticks: { fontStyle: normal } }], yAxes: [{ gridLines: { drawTicks: true }, ticks: { fontStyle: normal } }] } }
+    };
+    var rader_data_2 = {
+        labels: titles_short.slice(6, titles_short.length),
         datasets: dataset_of_radar,
         // options: { maintainAspectRatio: true, legend: { display: false, labels: { fontStyle: normal } }, title: { fontStyle: bold }, scales: { xAxes: [{ gridLines: { drawTicks: true }, ticks: { fontStyle: normal } }], yAxes: [{ gridLines: { drawTicks: true }, ticks: { fontStyle: normal } }] } }
     };
-    // var rader_data_2 = {
-    //     labels: titles_short,
-    //     datasets: [{ label: text + "的第一专业", backgroundColor: "#FF8C00", borderColor: "#FF8C00", data: data_int_final_2, fill: false }],
-    //     // options: { maintainAspectRatio: true, legend: { display: false, labels: { fontStyle: normal } }, title: { fontStyle: bold }, scales: { xAxes: [{ gridLines: { drawTicks: true }, ticks: { fontStyle: normal } }], yAxes: [{ gridLines: { drawTicks: true }, ticks: { fontStyle: normal } }] } }
-    // };
     // var rader_data_3 = {
     //     labels: titles_short,
     //     datasets: [{ label: text + "的第二专业", backgroundColor: "#FF8C00", borderColor: "#FF8C00", data: data_int_final_2, fill: false }],
@@ -404,7 +405,7 @@ function generate() {
 
     // 获取 canvas 元素
     var ctx_1 = document.getElementById("radar_pic_1").getContext("2d");
-    // var ctx_2 = document.getElementById("radar_pic_2").getContext("2d");
+    var ctx_2 = document.getElementById("radar_pic_2").getContext("2d");
     // var ctx_3 = document.getElementById("radar_pic_3").getContext("2d");
 
     // 创建一个图表对象
@@ -423,21 +424,21 @@ function generate() {
             }
         }
     });
-    // var radar_pic_2 = new Chart(ctx_2, {
-    //     // 指定图表类型为雷达图
-    //     type: "radar",
-    //     // 指定图表的数据和配置项
-    //     data: rader_data_2, // 使用你提供的数据
-    //     options: {
-    //         responsive: true, // 设置图表为响应式，根据屏幕窗口变化而变化
-    //         maintainAspectRatio: false, // 保持图表原有比例
-    //         elements: {
-    //             line: {
-    //                 borderWidth: 3 // 设置线条宽度
-    //             }
-    //         }
-    //     }
-    // });
+    var radar_pic_2 = new Chart(ctx_2, {
+        // 指定图表类型为雷达图
+        type: "radar",
+        // 指定图表的数据和配置项
+        data: rader_data_2, // 使用你提供的数据
+        options: {
+            responsive: true, // 设置图表为响应式，根据屏幕窗口变化而变化
+            maintainAspectRatio: false, // 保持图表原有比例
+            elements: {
+                line: {
+                    borderWidth: 3 // 设置线条宽度
+                }
+            }
+        }
+    });
     // var radar_pic_3 = new Chart(ctx_3, {
     //     // 指定图表类型为雷达图
     //     type: "radar",
