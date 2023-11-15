@@ -380,8 +380,8 @@ function generate() {
     // var div4 = document.getElementById("div4");
     // div4.innerHTML = "而你可以选择辅修的法术，它力度" + data_1[12] + "，速度是" + data_1[13] + "，广度更是" + data_1[14] + "；它的持久度是" + data_1[15] + "——能让你自己" + data_1[16] + "，带给你同伴的增益是能够" + data_1[17] + "！"
     dataset_of_radar = [
-        { label: text + "的第一专业", backgroundColor: 'rgb(255, 140, 140, 0.2)', borderColor: "#FF8C90", data: data_int_final_1, fill: true },
-        { label: text + "的第二专业", backgroundColor: 'rgb(255, 140, 255, 0.2)', borderColor: "#FF8Cff", data: data_int_final_2, fill: true },
+        { label: text + "的第一专业", backgroundColor: 'rgb(255, 140, 140, 0.2)', borderColor: "#FF8C90", data: data_int_final_1.slice(6, 12), fill: true },
+        { label: text + "的第二专业", backgroundColor: 'rgb(255, 140, 255, 0.2)', borderColor: "#FF8Cff", data: data_int_final_2.slice(6, 12), fill: true },
     ];
     var rader_data_1 = {
         labels: titles_short.slice(0, 6),
