@@ -208,6 +208,7 @@ function randomInt(seed) {
     var next = (a * seed + b) % m;
     // 将随机数加一，得到一个1-range的整数
     var num = next - 1;
+    if (num <= 0) num += 100;
     // 返回随机数
     return Math.abs(num);
 }
