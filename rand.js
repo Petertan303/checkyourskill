@@ -192,7 +192,7 @@ function getSeed(text) {
         sum += text.charCodeAt(i);
     }
     // 将和取模100，得到一个0-99的整数
-    var seed = sum % (2 ^ 48);
+    var seed = sum;
     // 返回种子
     return seed;
 }
@@ -271,7 +271,7 @@ function generate() {
             li_1.appendChild(div2);
             data_1[i] = item;
             list.appendChild(li_1);
-            seed = num;
+            seed = num_ori;
         }
 
         var num = Math.trunc(average(data_int_1));
@@ -303,7 +303,7 @@ function generate() {
             li_3.appendChild(div2);
             data_2[i] = item;
             list.appendChild(li_3);
-            seed = num;
+            seed = num_ori;
         }
     }
     var data_int_1_temp = []; // sort会改变原本的数组，使用新数组做缓冲
@@ -314,10 +314,10 @@ function generate() {
     // var major_1 = data_int_1_temp.sort()[0];
     // var major_2 = data_int_1_temp.sort()[1];
 
-    var max = Math.abs(Math.max(...data_int_1_temp)); // ...这个意思是扩展运算符(...)将数组转换为参数列表
+    var max = Math.abs(Math.max(...data_int_1_temp.slice(0, data_int_1_temp.length - 1))); // ...这个意思是扩展运算符(...)将数组转换为参数列表
     major_1 = data_int_1_temp.indexOf(max);
     data_int_1_temp[major_1] = -1;
-    var sub_max = Math.abs(Math.max(...data_int_1_temp)); // ...这个意思是扩展运算符(...)将数组转换为参数列表
+    var sub_max = Math.abs(Math.max(...data_int_1_temp.slice(0, data_int_1_temp.length - 1))); // ...这个意思是扩展运算符(...)将数组转换为参数列表
     major_2 = data_int_1_temp.indexOf(sub_max);
 
     data_final = data_1.concat(data_2); // 拼接，好用的
