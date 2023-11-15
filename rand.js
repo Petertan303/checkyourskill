@@ -305,15 +305,18 @@ function generate() {
             seed = num;
         }
     }
-    var data_int_1_temp = data_int_1; // sort会改变原本的数组，使用新数组做缓冲
+    var data_int_1_temp = []; // sort会改变原本的数组，使用新数组做缓冲
+    data_int_1.forEach((element, index) => {
+        data_int_1_temp[index] = element;
+    });
     // // 但这样不能获取最大值所在位置
     // var major_1 = data_int_1_temp.sort()[0];
     // var major_2 = data_int_1_temp.sort()[1];
 
-    var max = Math.max(...data_int_1_temp); // ...这个意思是扩展运算符(...)将数组转换为参数列表
+    var max = Math.abs(Math.max(...data_int_1_temp)); // ...这个意思是扩展运算符(...)将数组转换为参数列表
     major_1 = data_int_1_temp.indexOf(max);
     data_int_1_temp[major_1] = -1;
-    var sub_max = Math.max(...data_int_1_temp); // ...这个意思是扩展运算符(...)将数组转换为参数列表
+    var sub_max = Math.abs(Math.max(...data_int_1_temp)); // ...这个意思是扩展运算符(...)将数组转换为参数列表
     major_2 = data_int_1_temp.indexOf(sub_max);
 
     data_final = data_1.concat(data_2); // 拼接，好用的
