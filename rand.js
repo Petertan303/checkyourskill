@@ -311,10 +311,10 @@ function generate() {
     // var major_2 = data_int_1_temp.sort()[1];
 
     var max = Math.max(...data_int_1_temp); // ...这个意思是扩展运算符(...)将数组转换为参数列表
-    major_1 = data_int_1_temp.indexOf(max) - 1;
+    major_1 = data_int_1_temp.indexOf(max);
     data_int_1_temp[major_1] = -1;
     var sub_max = Math.max(...data_int_1_temp); // ...这个意思是扩展运算符(...)将数组转换为参数列表
-    major_2 = data_int_1_temp.indexOf(sub_max) - 1;
+    major_2 = data_int_1_temp.indexOf(sub_max);
 
     data_final = data_1.concat(data_2); // 拼接，好用的
     data_int_final_1 = data_int_1.concat(data_int_2.slice(0, 6));
